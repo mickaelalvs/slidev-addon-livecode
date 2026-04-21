@@ -14,6 +14,7 @@ const props = withDefaults(defineProps<EditorProps>(), {
   port: undefined,
   session: undefined,
   startTimeout: undefined,
+  zoom: 1,
 })
 
 const registry = inject<SessionRegistry>(REGISTRY_KEY)
@@ -40,6 +41,7 @@ const isStarting = computed(
 const hasFailed = computed(() => session.value?.state === 'ERROR')
 
 const resolvedFolder = computed(() => props.defaultFolder ?? deckConfig.value?.defaultFolder ?? '')
+const resolvedZoom = computed(() => props.zoom ?? deckConfig.value?.zoom ?? 1)
 
 const resolvedTimeout = computed(() => props.startTimeout ?? deckConfig.value?.startTimeout)
 
@@ -115,6 +117,7 @@ onBeforeUnmount(() => {
       <iframe
         v-if="session?.state === 'RUNNING' && session.url"
         :src="session.url"
+        :style="resolvedZoom !== 1 ? { zoom: String(resolvedZoom) } : undefined"
         class="slidev-editor-frame"
         allow="clipboard-read; clipboard-write"
       />

@@ -7,6 +7,7 @@ export interface EditorProps {
   port?: number
   session?: string
   startTimeout?: number
+  zoom?: number
 }
 
 export interface SessionEntry {
@@ -19,6 +20,7 @@ export interface EditorDeckConfig {
   defaultFolder?: string
   defaultPort?: number
   startTimeout?: number
+  zoom?: number
 }
 
 export interface StartRequest {
