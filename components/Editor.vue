@@ -46,7 +46,7 @@ const resolvedTimeout = computed(() => props.startTimeout ?? deckConfig.value?.s
 async function start(): Promise<void> {
   const entry = registry!.create(sessionId)
   session.value = entry
-  entry.state = 'STARTING'
+  registry!.setStarting(sessionId)
 
   try {
     const url = await requestStart(

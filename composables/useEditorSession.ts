@@ -18,6 +18,11 @@ export class SessionRegistry {
     return this.sessions.get(id)
   }
 
+  setStarting(id: string): void {
+    const entry = this.sessions.get(id)
+    if (entry) entry.state = 'STARTING'
+  }
+
   setRunning(id: string, url: string): void {
     const entry = this.sessions.get(id)
     if (!entry) return
