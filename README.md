@@ -105,12 +105,12 @@ Per-component props override these values.
 | Prop            | Type      | Default      | Description                                                             |
 | --------------- | --------- | ------------ | ----------------------------------------------------------------------- |
 | `session`       | `string`  | auto         | Unique session identifier. Auto-generated from slide number if omitted. |
-| `defaultFolder` | `string`  | project root | Workspace folder to open. Absolute or relative to the Slidev root.     |
+| `defaultFolder` | `string`  | project root | Workspace folder to open. Absolute or relative to the Slidev root.      |
 | `height`        | `string`  | `100%`       | CSS height of the editor container.                                     |
 | `persist`       | `boolean` | `false`      | Keep the session alive when navigating away.                            |
 | `port`          | `number`  | auto         | Force a specific port for this session.                                 |
 | `startTimeout`  | `number`  | `30000`      | Max startup time in ms before the session is marked as failed.          |
-| `zoom`          | `number`  | `1`          | Scale factor for the VS Code UI (e.g. `0.8` for 80%).                  |
+| `zoom`          | `number`  | `1`          | Scale factor for the VS Code UI (e.g. `0.8` for 80%).                   |
 
 ## ⚠️ Static exports
 
