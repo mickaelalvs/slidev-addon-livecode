@@ -42,7 +42,7 @@
     "format:check": "oxfmt --check .",
     "lint": "oxlint .",
     "lint:fix": "oxlint --fix .",
-    "release": "bumpp",
+    "release": "bumpp --commit '🔖 release v%s'",
     "test": "vitest run"
   },
   "devDependencies": {
