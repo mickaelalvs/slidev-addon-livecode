@@ -1,0 +1,49 @@
+/* ===== Fonts ===== */
+
+@font-face {
+  font-family: 'Biotif';
+  src: url('https://mickaelalvs.dev/static/font/Biotif-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neuzeit Grotesk';
+  src: url('https://mickaelalvs.dev/static/font/NeuzeitGrotesk-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url('https://mickaelalvs.dev/static/font/FiraCode-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* ===== Layout ===== */
+
+.slidev-layout.default {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Slidev font overrides ===== */
+
+.slidev-layout {
+  font-family: 'Biotif', sans-serif;
+}
+
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3,
+.slidev-layout h4 {
+  font-family: 'Neuzeit Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+.slidev-layout code,
+.slidev-layout pre {
+  font-family: 'Fira Code', monospace;
+}
