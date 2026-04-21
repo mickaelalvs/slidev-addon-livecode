@@ -80,14 +80,14 @@ Per-component props override these values.
 
 ## 🧩 `<Editor />` props
 
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `session` | `string` | auto | Unique session identifier. Auto-generated from slide number if omitted. |
-| `defaultFolder` | `string` | project root | Workspace folder to open. |
-| `height` | `string` | `100%` | CSS height of the editor container. |
-| `persist` | `boolean` | `false` | Keep the session alive when navigating away. |
-| `port` | `number` | auto | Force a specific port for this session. |
-| `startTimeout` | `number` | `30000` | Max startup time in ms before the session is marked as failed. |
+| Prop            | Type      | Default      | Description                                                             |
+| --------------- | --------- | ------------ | ----------------------------------------------------------------------- |
+| `session`       | `string`  | auto         | Unique session identifier. Auto-generated from slide number if omitted. |
+| `defaultFolder` | `string`  | project root | Workspace folder to open.                                               |
+| `height`        | `string`  | `100%`       | CSS height of the editor container.                                     |
+| `persist`       | `boolean` | `false`      | Keep the session alive when navigating away.                            |
+| `port`          | `number`  | auto         | Force a specific port for this session.                                 |
+| `startTimeout`  | `number`  | `30000`      | Max startup time in ms before the session is marked as failed.          |
 
 ## ⚠️ Static exports
 
