@@ -1,4 +1,5 @@
 import { existsSync } from 'node:fs'
+import { resolve } from 'node:path'
 
 import { defineConfig } from 'vite'
 
@@ -57,7 +58,8 @@ export default defineConfig({
           try {
             const { startCodeServer } = await import('coderaft')
 
-            const resolvedFolder = defaultFolder && existsSync(defaultFolder) ? defaultFolder : root
+            const absoluteFolder = defaultFolder ? resolve(root, defaultFolder) : root
+            const resolvedFolder = existsSync(absoluteFolder) ? absoluteFolder : root
 
             const handle = await Promise.race([
               startCodeServer({ defaultFolder: resolvedFolder, host: '127.0.0.1', port }),
