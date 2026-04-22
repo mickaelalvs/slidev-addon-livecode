@@ -104,14 +104,18 @@ Per-component props override these values.
 
 | Prop            | Type                | Default      | Description                                                                     |
 | --------------- | ------------------- | ------------ | ------------------------------------------------------------------------------- |
-| `session`       | `string`            | auto         | Unique session identifier. Auto-generated from slide number if omitted.         |
-| `defaultFolder` | `string`            | project root | Workspace folder to open. Absolute or relative to the Slidev root.              |
-| `colorScheme`   | `'dark' \| 'light'` | auto         | VS Code color theme. Defaults to Slidev's `colorSchema` if set, otherwise none. |
-| `height`        | `string`            | `100%`       | CSS height of the editor container.                                             |
-| `persist`       | `boolean`           | `false`      | Keep the session alive when navigating away.                                    |
-| `port`          | `number`            | auto         | Force a specific port for this session.                                         |
-| `startTimeout`  | `number`            | `30000`      | Max startup time in ms before the session is marked as failed.                  |
-| `zoom`          | `number`            | `1`          | Scale factor for the VS Code UI (e.g. `0.8` for 80%).                           |
+| `session`         | `string`            | auto    | Unique session identifier. Auto-generated from slide number if omitted.         |
+| `defaultFolder`   | `string`            | project root | Workspace folder to open. Absolute or relative to the Slidev root.         |
+| `colorScheme`     | `'dark' \| 'light'` | auto    | VS Code color theme. Defaults to Slidev's `colorSchema` if set, otherwise none. |
+| `fontSize`        | `number`            | —       | Editor font size. Useful for visibility in large rooms.                         |
+| `hideActivityBar` | `boolean`           | `false` | Hide the VS Code activity bar (left icon sidebar).                              |
+| `hideMinimap`     | `boolean`           | `false` | Hide the editor minimap.                                                        |
+| `hideStatusBar`   | `boolean`           | `false` | Hide the VS Code status bar (bottom bar).                                       |
+| `height`          | `string`            | `100%`  | CSS height of the editor container.                                             |
+| `persist`         | `boolean`           | `false` | Keep the session alive when navigating away.                                    |
+| `port`            | `number`            | auto    | Force a specific port for this session.                                         |
+| `startTimeout`    | `number`            | `30000` | Max startup time in ms before the session is marked as failed.                  |
+| `zoom`            | `number`            | `1`     | Scale factor for the VS Code UI (e.g. `0.8` for 80%).                          |
 
 ## ⚠️ Static exports
 

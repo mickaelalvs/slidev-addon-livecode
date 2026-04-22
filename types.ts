@@ -3,7 +3,11 @@ export type SessionState = 'IDLE' | 'STARTING' | 'RUNNING' | 'ERROR' | 'DESTROYE
 export interface EditorProps {
   colorScheme?: 'dark' | 'light'
   defaultFolder?: string
+  fontSize?: number
   height?: string
+  hideActivityBar?: boolean
+  hideMinimap?: boolean
+  hideStatusBar?: boolean
   persist?: boolean
   port?: number
   session?: string
@@ -28,6 +32,10 @@ export interface StartRequest {
   colorScheme?: 'dark' | 'light'
   defaultFolder: string
   defaultPort?: number
+  fontSize?: number
+  hideActivityBar?: boolean
+  hideMinimap?: boolean
+  hideStatusBar?: boolean
   port?: number
   session: string
   startTimeout?: number

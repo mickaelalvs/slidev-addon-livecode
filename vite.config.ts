@@ -48,6 +48,10 @@ export default defineConfig({
             colorScheme,
             defaultFolder,
             defaultPort = DEFAULT_PORT,
+            fontSize,
+            hideActivityBar,
+            hideMinimap,
+            hideStatusBar,
             port: requestedPort,
             session,
             startTimeout = DEFAULT_START_TIMEOUT_MS,
@@ -68,14 +72,18 @@ export default defineConfig({
             const absoluteFolder = defaultFolder ? resolve(root, defaultFolder) : root
             const resolvedFolder = existsSync(absoluteFolder) ? absoluteFolder : root
 
+            const settings: Record<string, unknown> = {}
+            if (colorScheme) settings['workbench.colorTheme'] = COLOR_THEMES[colorScheme]
+            if (fontSize) settings['editor.fontSize'] = fontSize
+            if (hideMinimap) settings['editor.minimap.enabled'] = false
+            if (hideActivityBar) settings['workbench.activityBar.location'] = 'hidden'
+            if (hideStatusBar) settings['workbench.statusBar.visible'] = false
+
             let userDataDir: string | undefined
-            if (colorScheme) {
+            if (Object.keys(settings).length > 0) {
               userDataDir = mkdtempSync(join(tmpdir(), 'livecode-'))
               mkdirSync(join(userDataDir, 'User'), { recursive: true })
-              writeFileSync(
-                join(userDataDir, 'User', 'settings.json'),
-                JSON.stringify({ 'workbench.colorTheme': COLOR_THEMES[colorScheme] }),
-              )
+              writeFileSync(join(userDataDir, 'User', 'settings.json'), JSON.stringify(settings))
             }
 
             const handle = await Promise.race([

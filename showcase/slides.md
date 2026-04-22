@@ -88,3 +88,11 @@ State is preserved when navigating away and back.
 <div class="flex-1 rounded-xl overflow-hidden border border-gray-200">
   <Editor session="dark" colorScheme="dark" />
 </div>
+
+---
+
+# 🔬 Presentation mode
+
+<div class="flex-1 rounded-xl overflow-hidden border border-gray-200">
+  <Editor session="presentation" :fontSize="18" hideMinimap hideActivityBar hideStatusBar />
+</div>
