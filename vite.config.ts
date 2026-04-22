@@ -1,5 +1,6 @@
-import { existsSync } from 'node:fs'
-import { resolve } from 'node:path'
+import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join, resolve } from 'node:path'
 
 import { defineConfig } from 'vite'
 
@@ -22,9 +23,14 @@ export default defineConfig({
 
       configureServer(server) {
         const root = server.config.root
+        const COLOR_THEMES = {
+          dark: 'Default Dark Modern',
+          light: 'Default Light Modern',
+        } as const
+
         const sessions = new Map<
           string,
-          { close: () => Promise<void>; port: number; url: string }
+          { close: () => Promise<void>; port: number; url: string; userDataDir?: string }
         >()
         const usedPorts = new Set<number>()
 
@@ -39,6 +45,7 @@ export default defineConfig({
 
         server.ws.on('livecode:start', async (request: StartRequest) => {
           const {
+            colorScheme,
             defaultFolder,
             defaultPort = DEFAULT_PORT,
             port: requestedPort,
@@ -61,8 +68,23 @@ export default defineConfig({
             const absoluteFolder = defaultFolder ? resolve(root, defaultFolder) : root
             const resolvedFolder = existsSync(absoluteFolder) ? absoluteFolder : root
 
+            let userDataDir: string | undefined
+            if (colorScheme) {
+              userDataDir = mkdtempSync(join(tmpdir(), 'livecode-'))
+              mkdirSync(join(userDataDir, 'User'), { recursive: true })
+              writeFileSync(
+                join(userDataDir, 'User', 'settings.json'),
+                JSON.stringify({ 'workbench.colorTheme': COLOR_THEMES[colorScheme] }),
+              )
+            }
+
             const handle = await Promise.race([
-              startCodeServer({ defaultFolder: resolvedFolder, host: '127.0.0.1', port }),
+              startCodeServer({
+                defaultFolder: resolvedFolder,
+                host: '127.0.0.1',
+                port,
+                ...(userDataDir ? { vscode: { 'user-data-dir': userDataDir } } : {}),
+              }),
               new Promise<never>((_, reject) =>
                 setTimeout(
                   () => reject(new Error(`timeout after ${startTimeout}ms`)),
@@ -71,7 +93,12 @@ export default defineConfig({
               ),
             ])
 
-            sessions.set(session, { close: () => handle.close(), port, url: handle.url })
+            sessions.set(session, {
+              close: () => handle.close(),
+              port,
+              url: handle.url,
+              userDataDir,
+            })
             console.log(`[livecode] Session "${session}" running at ${handle.url}`)
             sendStartedEvent(session, handle.url, 'running')
           } catch (err) {
@@ -86,6 +113,7 @@ export default defineConfig({
           const entry = sessions.get(session)
           if (!entry) return
           entry.close().catch(() => {})
+          if (entry.userDataDir) rmSync(entry.userDataDir, { recursive: true, force: true })
           sessions.delete(session)
           usedPorts.delete(entry.port)
           console.log(`[livecode] Session "${session}" stopped`)
@@ -94,6 +122,7 @@ export default defineConfig({
         const cleanup = () => {
           for (const [, entry] of sessions) {
             entry.close().catch(() => {})
+            if (entry.userDataDir) rmSync(entry.userDataDir, { recursive: true, force: true })
           }
           sessions.clear()
           usedPorts.clear()

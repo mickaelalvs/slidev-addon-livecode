@@ -80,3 +80,11 @@ State is preserved when navigating away and back.
 <div class="flex-1 rounded-xl overflow-hidden border border-gray-200">
   <Editor session="zoomed" :zoom="0.5" />
 </div>
+
+---
+
+# 🌗 Color scheme
+
+<div class="flex-1 rounded-xl overflow-hidden border border-gray-200">
+  <Editor session="dark" colorScheme="dark" />
+</div>
