@@ -1,6 +1,7 @@
 export type SessionState = 'IDLE' | 'STARTING' | 'RUNNING' | 'ERROR' | 'DESTROYED'
 
 export interface EditorProps {
+  colorScheme?: 'dark' | 'light'
   defaultFolder?: string
   height?: string
   persist?: boolean
@@ -24,6 +25,7 @@ export interface EditorDeckConfig {
 }
 
 export interface StartRequest {
+  colorScheme?: 'dark' | 'light'
   defaultFolder: string
   defaultPort?: number
   port?: number

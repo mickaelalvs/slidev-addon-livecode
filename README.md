@@ -46,6 +46,17 @@ Both absolute and relative paths are supported. Relative paths are resolved from
 <Editor session="demo" defaultFolder=".." />
 ```
 
+## 🌗 Color scheme
+
+Force VS Code to use a specific color theme:
+
+```md
+<Editor session="demo" colorScheme="dark" />
+<Editor session="demo" colorScheme="light" />
+```
+
+If omitted, the color scheme automatically follows your Slidev presentation's `colorSchema` setting.
+
 ## 🔍 Zoom
 
 VS Code can appear too large inside a slide. Use the `zoom` prop to scale it down:
@@ -91,15 +102,16 @@ Per-component props override these values.
 
 ## 🧩 `<Editor />` props
 
-| Prop            | Type      | Default      | Description                                                             |
-| --------------- | --------- | ------------ | ----------------------------------------------------------------------- |
-| `session`       | `string`  | auto         | Unique session identifier. Auto-generated from slide number if omitted. |
-| `defaultFolder` | `string`  | project root | Workspace folder to open. Absolute or relative to the Slidev root.      |
-| `height`        | `string`  | `100%`       | CSS height of the editor container.                                     |
-| `persist`       | `boolean` | `false`      | Keep the session alive when navigating away.                            |
-| `port`          | `number`  | auto         | Force a specific port for this session.                                 |
-| `startTimeout`  | `number`  | `30000`      | Max startup time in ms before the session is marked as failed.          |
-| `zoom`          | `number`  | `1`          | Scale factor for the VS Code UI (e.g. `0.8` for 80%).                   |
+| Prop            | Type                | Default      | Description                                                                     |
+| --------------- | ------------------- | ------------ | ------------------------------------------------------------------------------- |
+| `session`       | `string`            | auto         | Unique session identifier. Auto-generated from slide number if omitted.         |
+| `defaultFolder` | `string`            | project root | Workspace folder to open. Absolute or relative to the Slidev root.              |
+| `colorScheme`   | `'dark' \| 'light'` | auto         | VS Code color theme. Defaults to Slidev's `colorSchema` if set, otherwise none. |
+| `height`        | `string`            | `100%`       | CSS height of the editor container.                                             |
+| `persist`       | `boolean`           | `false`      | Keep the session alive when navigating away.                                    |
+| `port`          | `number`            | auto         | Force a specific port for this session.                                         |
+| `startTimeout`  | `number`            | `30000`      | Max startup time in ms before the session is marked as failed.                  |
+| `zoom`          | `number`            | `1`          | Scale factor for the VS Code UI (e.g. `0.8` for 80%).                           |
 
 ## ⚠️ Static exports
 

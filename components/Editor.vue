@@ -8,6 +8,7 @@ import { REGISTRY_KEY } from '../setup/main'
 import type { EditorDeckConfig, EditorProps, SessionEntry } from '../types'
 
 const props = withDefaults(defineProps<EditorProps>(), {
+  colorScheme: undefined,
   defaultFolder: undefined,
   height: '100%',
   persist: false,
@@ -41,6 +42,12 @@ const isStarting = computed(
 const hasFailed = computed(() => session.value?.state === 'ERROR')
 
 const resolvedFolder = computed(() => props.defaultFolder ?? deckConfig.value?.defaultFolder ?? '')
+
+const slidevColorSchema = computed(() => {
+  const schema = ($slidev.configs as { colorSchema?: string }).colorSchema
+  return schema === 'light' || schema === 'dark' ? schema : undefined
+})
+const resolvedColorScheme = computed(() => props.colorScheme ?? slidevColorSchema.value)
 const resolvedZoom = computed(() => props.zoom ?? deckConfig.value?.zoom ?? 1)
 
 const resolvedTimeout = computed(() => props.startTimeout ?? deckConfig.value?.startTimeout)
@@ -53,6 +60,7 @@ async function start(): Promise<void> {
   try {
     const url = await requestStart(
       {
+        colorScheme: resolvedColorScheme.value,
         defaultFolder: resolvedFolder.value,
         defaultPort: deckConfig.value?.defaultPort,
         port: props.port,
