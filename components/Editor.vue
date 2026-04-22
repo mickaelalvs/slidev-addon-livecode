@@ -9,6 +9,7 @@ import type { EditorDeckConfig, EditorProps, SessionEntry } from '../types'
 
 const props = withDefaults(defineProps<EditorProps>(), {
   defaultFolder: undefined,
+  openFile: undefined,
   height: '100%',
   persist: false,
   port: undefined,
@@ -54,6 +55,7 @@ async function start(): Promise<void> {
     const url = await requestStart(
       {
         defaultFolder: resolvedFolder.value,
+        openFile: props.openFile,
         defaultPort: deckConfig.value?.defaultPort,
         port: props.port,
         session: sessionId,

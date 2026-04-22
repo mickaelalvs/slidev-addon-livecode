@@ -40,6 +40,7 @@ export default defineConfig({
         server.ws.on('livecode:start', async (request: StartRequest) => {
           const {
             defaultFolder,
+            openFile,
             defaultPort = DEFAULT_PORT,
             port: requestedPort,
             session,
@@ -61,8 +62,10 @@ export default defineConfig({
             const absoluteFolder = defaultFolder ? resolve(root, defaultFolder) : root
             const resolvedFolder = existsSync(absoluteFolder) ? absoluteFolder : root
 
+            const resolvedOpenFile = openFile ? resolve(root, openFile) : undefined
+
             const handle = await Promise.race([
-              startCodeServer({ defaultFolder: resolvedFolder, host: '127.0.0.1', port }),
+              startCodeServer({ defaultFolder: resolvedFolder, openFile: resolvedOpenFile, host: '127.0.0.1', port }),
               new Promise<never>((_, reject) =>
                 setTimeout(
                   () => reject(new Error(`timeout after ${startTimeout}ms`)),

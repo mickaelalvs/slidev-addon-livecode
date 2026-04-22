@@ -2,6 +2,7 @@ export type SessionState = 'IDLE' | 'STARTING' | 'RUNNING' | 'ERROR' | 'DESTROYE
 
 export interface EditorProps {
   defaultFolder?: string
+  openFile?: string
   height?: string
   persist?: boolean
   port?: number
@@ -25,6 +26,7 @@ export interface EditorDeckConfig {
 
 export interface StartRequest {
   defaultFolder: string
+  openFile?: string
   defaultPort?: number
   port?: number
   session: string
