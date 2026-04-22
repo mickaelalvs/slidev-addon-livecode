@@ -35,6 +35,7 @@ export class SessionManager {
       hideActivityBar,
       hideMinimap,
       hideStatusBar,
+      openFile,
       port: requestedPort,
       session,
       startTimeout = DEFAULT_START_TIMEOUT_MS,
@@ -54,6 +55,8 @@ export class SessionManager {
 
       const absoluteFolder = defaultFolder ? resolve(root, defaultFolder) : root
       const resolvedFolder = existsSync(absoluteFolder) ? absoluteFolder : root
+
+      const resolvedOpenFile = openFile ? resolve(root, openFile) : undefined
 
       const settings: Record<string, unknown> = {}
       if (colorScheme) settings['workbench.colorTheme'] = COLOR_THEMES[colorScheme]
@@ -78,6 +81,17 @@ export class SessionManager {
             'disable-workspace-trust': true,
             ...(userDataDir ? { 'user-data-dir': userDataDir } : {}),
           },
+          ...(resolvedOpenFile
+            ? {
+                formatURL: (url: URL) => {
+                  url.searchParams.set(
+                    'payload',
+                    JSON.stringify([['openFile', `vscode-remote://remote${resolvedOpenFile}`]]),
+                  )
+                  return url
+                },
+              }
+            : {}),
         }),
         new Promise<never>((_, reject) =>
           setTimeout(() => reject(new Error(`timeout after ${startTimeout}ms`)), startTimeout),

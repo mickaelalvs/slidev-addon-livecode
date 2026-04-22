@@ -21,6 +21,7 @@ const props = withDefaults(defineProps<EditorProps>(), {
   hideActivityBar: false,
   hideMinimap: false,
   hideStatusBar: false,
+  openFile: undefined,
   persist: false,
   preload: false,
   zoom: 1,
@@ -79,6 +80,7 @@ async function start(): Promise<void> {
       {
         colorScheme: resolvedColorScheme.value,
         defaultFolder: resolvedFolder.value,
+        openFile: props.openFile,
         defaultPort: deckConfig.value?.defaultPort,
         fontSize: props.fontSize,
         hideActivityBar: props.hideActivityBar,

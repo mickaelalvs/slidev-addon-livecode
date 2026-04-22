@@ -6,7 +6,7 @@ livecode:
   defaultPort: 9000
 ---
 
-<div class="absolute inset-0 flex items-center justify-center bg-white">
+ <div class="absolute inset-0 flex items-center justify-center bg-white">
 
   <div class="absolute top-14 right-28 text-[28px] font-bold text-[#1a1a1a]" style="font-family: 'Neuzeit Grotesk', sans-serif;">
     MA
@@ -49,6 +49,14 @@ Add `<Editor />` to any slide. Use `session` to identify it and `defaultFolder` 
 
 <div class="flex-1 mt-1 rounded-xl overflow-hidden border border-gray-200">
   <Editor session="basic" preload disableInitialFocus />
+</div>
+
+---
+
+# 📄 Open a file on start
+
+<div class="flex-1 rounded-xl overflow-hidden border border-gray-200">
+  <Editor session="open-file" defaultFolder=".." openFile="../vite.config.ts" />
 </div>
 
 ---

@@ -8,6 +8,7 @@ export interface EditorProps {
   hideActivityBar?: boolean
   hideMinimap?: boolean
   hideStatusBar?: boolean
+  openFile?: string
   persist?: boolean
   port?: number
   preload?: boolean
@@ -32,6 +33,7 @@ export interface EditorDeckConfig {
 export interface StartRequest {
   colorScheme?: 'dark' | 'light'
   defaultFolder: string
+  openFile?: string
   defaultPort?: number
   fontSize?: number
   hideActivityBar?: boolean
