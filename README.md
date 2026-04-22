@@ -46,17 +46,6 @@ Both absolute and relative paths are supported. Relative paths are resolved from
 <Editor session="demo" defaultFolder=".." />
 ```
 
-## 🪟 Two editors side by side
-
-```md
-<div class="grid grid-cols-2 gap-4 h-80">
-  <Editor session="client" defaultFolder="/path/to/client" />
-  <Editor session="server" defaultFolder="/path/to/server" />
-</div>
-```
-
-Each session runs on its own port. They don't share state.
-
 ## 🔍 Zoom
 
 VS Code can appear too large inside a slide. Use the `zoom` prop to scale it down:
