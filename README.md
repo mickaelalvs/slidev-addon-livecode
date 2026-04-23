@@ -1,5 +1,10 @@
 # 🛶 slidev-addon-livecode
 
+[![npmx](https://img.shields.io/npm/v/slidev-addon-livecode?style=for-the-badge&logo=npm&logoColor=white&label=npmx&labelColor=000000&color=18181b)](https://npmx.dev/package/slidev-addon-livecode)
+[![npm](https://img.shields.io/npm/v/slidev-addon-livecode?style=for-the-badge&logo=npm&logoColor=white&labelColor=cb0000&color=18181b)](https://www.npmjs.com/package/slidev-addon-livecode)
+[![license](https://img.shields.io/github/license/mickaelalvs/slidev-addon-livecode?style=for-the-badge&labelColor=3da639&color=18181b)](./LICENSE)
+[![slidev](https://img.shields.io/badge/slidev-%3E%3D52-18181b?style=for-the-badge&logo=slidev&logoColor=white&labelColor=2b90b6&color=18181b)](https://sli.dev)
+
 Embed a live VS Code IDE in your [Slidev](https://sli.dev) presentations.
 
 Powered by [coderaft](https://github.com/pithings/coderaft), a zero-dependency redistribution of code-server that installs in under a second.
@@ -21,7 +26,7 @@ addons:
 
 ## 🚀 Basic usage
 
-```md
+```yaml
 ---
 addons:
   - livecode
@@ -36,13 +41,13 @@ That's it. When you navigate to the slide, a VS Code instance starts automatical
 
 ## 📂 Open a specific workspace
 
-```md
+```vue
 <Editor session="demo" defaultFolder="/path/to/your/project" />
 ```
 
 Both absolute and relative paths are supported. Relative paths are resolved from the Slidev project root:
 
-```md
+```vue
 <Editor session="demo" defaultFolder=".." />
 ```
 
@@ -50,7 +55,7 @@ Both absolute and relative paths are supported. Relative paths are resolved from
 
 Force VS Code to use a specific color theme:
 
-```md
+```vue
 <Editor session="demo" colorScheme="dark" />
 <Editor session="demo" colorScheme="light" />
 ```
@@ -61,7 +66,7 @@ If omitted, the color scheme automatically follows your Slidev presentation's `c
 
 VS Code can appear too large inside a slide. Use the `zoom` prop to scale it down:
 
-```md
+```vue
 <Editor session="demo" :zoom="0.8" />
 ```
 
@@ -76,7 +81,7 @@ livecode:
 
 Use `disableInitialFocus` to prevent VS Code from stealing keyboard focus when you navigate to a slide — arrow keys keep working for Slidev navigation:
 
-```md
+```vue
 <Editor session="demo" disableInitialFocus />
 ```
 
@@ -86,7 +91,7 @@ Focus is held on the slide for 5 seconds after VS Code loads, then released norm
 
 Use `preload` to warm up the VS Code session before the user reaches the slide. Slidev mounts adjacent slides in the background, so the session can start while the user is still on the previous slide:
 
-```md
+```vue
 <Editor session="demo" preload />
 ```
 
@@ -96,7 +101,7 @@ Combine with `disableInitialFocus` for a seamless experience — the IDE is read
 
 By default, navigating away from a slide stops the session. Use `persist` to keep it running:
 
-```md
+```vue
 <Editor session="demo" persist />
 ```
 
@@ -143,12 +148,19 @@ Per-component props override these values.
 
 The `<Editor />` component requires Slidev dev mode. In static exports (`slidev build`), it renders a placeholder instead. Plan your demos accordingly.
 
-## Requirements
+## 🏷️ Requirements
 
 - `@slidev/client >= 52`
 - `coderaft >= 0.0.25`
 - `vue >= 3.4`
 
+## Maintainer
+
+Made by [Mickaël Alves](https://mickaelalvs.dev) — [mickaelalvs.dev](https://mickaelalvs.dev)
+
+[![Bluesky](https://img.shields.io/badge/Bluesky-mickaelalvs.dev-0285FF?style=for-the-badge&logo=bluesky&logoColor=white)](https://bsky.app/profile/mickaelalvs.dev)
+[![GitHub](https://img.shields.io/badge/GitHub-mickaelalvs-18181b?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mickaelalvs)
+
 ## License
 
-MIT
+[![license](https://img.shields.io/github/license/mickaelalvs/slidev-addon-livecode?style=for-the-badge&labelColor=3da639&color=18181b)](./LICENSE)
