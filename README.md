@@ -9,7 +9,7 @@ Embed a live VS Code IDE in your [Slidev](https://sli.dev) presentations.
 
 Powered by [coderaft](https://github.com/pithings/coderaft), a zero-dependency redistribution of code-server that installs in under a second.
 
-![demo](https://github.com/user-attachments/assets/05cbc8c8-c476-404e-9f1e-93ca0b7daba7)
+![demo](https://github.com/user-attachments/assets/221dedbd-b44a-40fc-a517-0568d0037eb3)
 
 ## 🎤 Why
 
