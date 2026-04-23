@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject, onBeforeUnmount, shallowRef, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, ref, shallowRef, useAttrs, useTemplateRef, watch } from 'vue'
 import { useIsSlideActive, useNav, useSlideContext } from '@slidev/client'
 
 import { requestStart, requestStop } from '../composables/useStartRequest'
@@ -8,17 +8,12 @@ import { REGISTRY_KEY } from '../setup/main'
 import type { EditorDeckConfig, EditorProps, SessionEntry } from '../types'
 
 const props = withDefaults(defineProps<EditorProps>(), {
-  colorScheme: undefined,
-  defaultFolder: undefined,
-  fontSize: undefined,
+  disableInitialFocus: false,
   height: '100%',
   hideActivityBar: false,
   hideMinimap: false,
   hideStatusBar: false,
   persist: false,
-  port: undefined,
-  session: undefined,
-  startTimeout: undefined,
   zoom: 1,
 })
 
@@ -37,6 +32,11 @@ const deckConfig = computed<EditorDeckConfig | undefined>(
 const { currentPage } = useNav()
 
 const sessionId = props.session ?? `livecode-${currentPage.value}-${props.port ?? 'default'}`
+
+const attrs = useAttrs()
+const isDisableInitialFocus = computed(() =>
+  !!props.disableInitialFocus || 'disableInitialFocus' in attrs || 'disable-initial-focus' in attrs,
+)
 
 const session = shallowRef<SessionEntry | null>(registry.get(sessionId) ?? null)
 
@@ -78,6 +78,7 @@ async function start(): Promise<void> {
       resolvedTimeout.value,
     )
     if (entry.state === 'DESTROYED') return
+    if (isDisableInitialFocus.value) startGuard()
     registry!.setRunning(sessionId, url)
   } catch (err) {
     if (entry.state !== 'DESTROYED') registry!.setError(sessionId)
@@ -112,7 +113,40 @@ watch(
   { flush: 'post', immediate: true },
 )
 
+const containerRef = useTemplateRef<HTMLElement>('container')
+const isGuarding = ref(false)
+let guardTimer: ReturnType<typeof setTimeout> | null = null
+
+function handleWindowBlur() {
+  if (!isGuarding.value) return
+  setTimeout(() => containerRef.value?.focus(), 0)
+}
+
+function startGuard() {
+  if (guardTimer) clearTimeout(guardTimer)
+  isGuarding.value = true
+  containerRef.value?.focus()
+  window.addEventListener('blur', handleWindowBlur)
+  guardTimer = setTimeout(() => {
+    isGuarding.value = false
+    window.removeEventListener('blur', handleWindowBlur)
+    guardTimer = null
+  }, 5000)
+}
+
+function stopGuard() {
+  window.removeEventListener('blur', handleWindowBlur)
+  if (guardTimer) { clearTimeout(guardTimer); guardTimer = null }
+  isGuarding.value = false
+}
+
+watch(isActive, (active) => {
+  if (!active || !isDisableInitialFocus.value) { stopGuard(); return }
+  if (session.value?.state === 'RUNNING') startGuard()
+})
+
 onBeforeUnmount(() => {
+  stopGuard()
   if (!props.persist) {
     requestStop(sessionId)
     registry!.teardown(sessionId)
@@ -121,7 +155,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="slidev-editor" :style="{ height }">
+  <div ref="container" class="slidev-editor" :style="{ height }" tabindex="-1">
     <template v-if="!$slidev?.nav">
       <div class="slidev-editor-overlay">
         <div class="slidev-editor-overlay-title">IDE not available</div>

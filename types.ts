@@ -3,6 +3,7 @@ export type SessionState = 'IDLE' | 'STARTING' | 'RUNNING' | 'ERROR' | 'DESTROYE
 export interface EditorProps {
   colorScheme?: 'dark' | 'light'
   defaultFolder?: string
+  disableInitialFocus?: boolean
   fontSize?: number
   height?: string
   hideActivityBar?: boolean

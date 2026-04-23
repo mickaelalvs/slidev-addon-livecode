@@ -16,6 +16,7 @@
   background: var(--slidev-editor-bg);
   border: var(--slidev-editor-border);
   border-radius: var(--slidev-editor-border-radius);
+  outline: none;
   overflow: hidden;
   position: relative;
   width: 100%;

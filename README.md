@@ -72,6 +72,16 @@ livecode:
   zoom: 0.8
 ```
 
+## 🎯 Keyboard navigation guard
+
+Use `disableInitialFocus` to prevent VS Code from stealing keyboard focus when you navigate to a slide — arrow keys keep working for Slidev navigation:
+
+```md
+<Editor session="demo" disableInitialFocus />
+```
+
+Focus is held on the slide for 5 seconds after VS Code loads, then released normally. The user can interact with VS Code freely after that.
+
 ## 🔒 Keep the session alive across navigation
 
 By default, navigating away from a slide stops the session. Use `persist` to keep it running:
@@ -108,6 +118,7 @@ Per-component props override these values.
 | `defaultFolder`   | `string`            | project root | Workspace folder to open. Absolute or relative to the Slidev root.         |
 | `colorScheme`     | `'dark' \| 'light'` | auto    | VS Code color theme. Defaults to Slidev's `colorSchema` if set, otherwise none. |
 | `fontSize`        | `number`            | —       | Editor font size. Useful for visibility in large rooms.                         |
+| `disableInitialFocus` | `boolean`       | `false` | Prevent VS Code from stealing keyboard focus on slide entry.                    |
 | `hideActivityBar` | `boolean`           | `false` | Hide the VS Code activity bar (left icon sidebar).                              |
 | `hideMinimap`     | `boolean`           | `false` | Hide the editor minimap.                                                        |
 | `hideStatusBar`   | `boolean`           | `false` | Hide the VS Code status bar (bottom bar).                                       |
