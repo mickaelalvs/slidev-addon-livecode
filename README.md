@@ -9,6 +9,14 @@ Embed a live VS Code IDE in your [Slidev](https://sli.dev) presentations.
 
 Powered by [coderaft](https://github.com/pithings/coderaft), a zero-dependency redistribution of code-server that installs in under a second.
 
+## 🎤 Why
+
+I often give live presentations where I need to show and modify code in real time. Switching between slides and a local IDE breaks the flow — alt-tabbing mid-talk is jarring for the audience and for me.
+
+`slidev-addon-livecode` embeds a full VS Code instance directly into your slides, so your code demos stay in context. No context switching, no alt-tabbing.
+
+> 🗞️ **Inspired by** [Stop Alt-Tabbing: Embed an IDE in Your Live-Coding Slides](https://mickaelalvs.dev/articles/stop-alt-tabbing-embed-ide-live-coding-slides).
+
 ## 📦 Install
 
 ```bash
@@ -85,7 +93,7 @@ Use `disableInitialFocus` to prevent VS Code from stealing keyboard focus when y
 <Editor session="demo" disableInitialFocus />
 ```
 
-Focus is held on the slide for 5 seconds after VS Code loads, then released normally. The user can interact with VS Code freely after that.
+Focus is held on the slide, after an interaction, the user can interact with VS Code freely after that.
 
 ## ⚡ Preload
 
@@ -144,15 +152,48 @@ Per-component props override these values.
 | `startTimeout`        | `number`            | `30000`      | Max startup time in ms before the session is marked as failed.                  |
 | `zoom`                | `number`            | `1`          | Scale factor for the VS Code UI (e.g. `0.8` for 80%).                           |
 
+## 🎬 Showcase
+
+A demo deck lives in `showcase/`. Run it with:
+
+```bash
+pnpm run dev
+```
+## 🧩 Slidev features
+
+`<Editor />` works alongside all [Slidev built-in features](https://sli.dev/features/), drag, resize, click animations, and more. Compose it freely with the rest of your slide content.
+
 ## ⚠️ Static exports
 
 The `<Editor />` component requires Slidev dev mode. In static exports (`slidev build`), it renders a placeholder instead. Plan your demos accordingly.
+
+## 🔗 Combine with
+
+Pair `<Editor />` with other addons for a fully self-contained demo environment — no need to leave your slides at all:
+
+- **[slidev-addon-liveshell](https://npmx.dev/package/slidev-addon-liveshell)** — embed a live terminal directly in your slide alongside the editor.
+- **An `<iframe>` pointing to your dev server** — embed your running app next to the editor. Edit code in VS Code, and the hot reload updates the iframe in real time, all without leaving the presentation.
+
+```vue
+<div class="flex gap-2 flex-1">
+  <Editor session="demo" class="w-1/2" />
+  <iframe src="http://localhost:5173" class="w-1/2" />
+</div>
+```
 
 ## 🏷️ Requirements
 
 - `@slidev/client >= 52`
 - `coderaft >= 0.0.25`
 - `vue >= 3.4`
+
+## 💡 Ideas
+
+Features that may land in a future release:
+
+- **Open a specific file on load** — open a file directly from `<Editor />` props, pending [coderaft#4](https://github.com/pithings/coderaft/pull/4)
+- **Pre-installed extensions** — declare VS Code extensions to install automatically when the session starts.
+- **Keyboard shortcuts** — configure custom keybindings per session via props.
 
 ## Maintainer
 
