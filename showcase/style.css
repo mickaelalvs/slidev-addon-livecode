@@ -40,7 +40,14 @@
 .slidev-layout h4 {
   font-family: 'Neuzeit Grotesk', sans-serif;
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
+  margin-bottom: 0;
+}
+
+.slidev-layout p {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem !important;
+  margin-top: 0.25rem;
 }
 
 .slidev-layout code,
