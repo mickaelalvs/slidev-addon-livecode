@@ -1,5 +1,14 @@
 <script setup lang="ts">
-import { computed, inject, onBeforeUnmount, ref, shallowRef, useAttrs, useTemplateRef, watch } from 'vue'
+import {
+  computed,
+  inject,
+  onBeforeUnmount,
+  ref,
+  shallowRef,
+  useAttrs,
+  useTemplateRef,
+  watch,
+} from 'vue'
 import { useIsSlideActive, useNav, useSlideContext } from '@slidev/client'
 
 import { requestStart, requestStop } from '../composables/useStartRequest'
@@ -35,8 +44,11 @@ const { currentPage } = useNav()
 const sessionId = props.session ?? `livecode-${currentPage.value}-${props.port ?? 'default'}`
 
 const attrs = useAttrs()
-const isDisableInitialFocus = computed(() =>
-  !!props.disableInitialFocus || 'disableInitialFocus' in attrs || 'disable-initial-focus' in attrs,
+const isDisableInitialFocus = computed(
+  () =>
+    !!props.disableInitialFocus ||
+    'disableInitialFocus' in attrs ||
+    'disable-initial-focus' in attrs,
 )
 const isPreload = computed(() => !!props.preload || 'preload' in attrs)
 
@@ -143,12 +155,18 @@ function startGuard() {
 
 function stopGuard() {
   window.removeEventListener('blur', handleWindowBlur)
-  if (guardTimer) { clearTimeout(guardTimer); guardTimer = null }
+  if (guardTimer) {
+    clearTimeout(guardTimer)
+    guardTimer = null
+  }
   isGuarding.value = false
 }
 
 watch(isActive, (active) => {
-  if (!active || !isDisableInitialFocus.value) { stopGuard(); return }
+  if (!active || !isDisableInitialFocus.value) {
+    stopGuard()
+    return
+  }
   if (session.value?.state === 'RUNNING') startGuard()
 })
 
