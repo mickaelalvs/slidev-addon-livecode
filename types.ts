@@ -11,6 +11,7 @@ export interface EditorProps {
   hideStatusBar?: boolean
   persist?: boolean
   port?: number
+  preload?: boolean
   session?: string
   startTimeout?: number
   zoom?: number

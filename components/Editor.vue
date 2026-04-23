@@ -14,6 +14,7 @@ const props = withDefaults(defineProps<EditorProps>(), {
   hideMinimap: false,
   hideStatusBar: false,
   persist: false,
+  preload: false,
   zoom: 1,
 })
 
@@ -37,6 +38,7 @@ const attrs = useAttrs()
 const isDisableInitialFocus = computed(() =>
   !!props.disableInitialFocus || 'disableInitialFocus' in attrs || 'disable-initial-focus' in attrs,
 )
+const isPreload = computed(() => !!props.preload || 'preload' in attrs)
 
 const session = shallowRef<SessionEntry | null>(registry.get(sessionId) ?? null)
 
@@ -94,17 +96,22 @@ async function retry(): Promise<void> {
 
 const isActive = useIsSlideActive()
 
+let hasBeenActive = false
+
 watch(
   isActive,
   async (active) => {
     if (active) {
+      hasBeenActive = true
       const existing = registry!.get(sessionId)
       if (existing) {
         session.value = existing
         return
       }
       await start()
-    } else if (!props.persist) {
+    } else if (isPreload.value && !hasBeenActive && !registry!.get(sessionId)) {
+      await start()
+    } else if (!props.persist && hasBeenActive) {
       requestStop(sessionId)
       registry!.teardown(sessionId)
       session.value = null

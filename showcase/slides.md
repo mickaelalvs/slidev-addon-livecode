@@ -48,7 +48,7 @@ livecode:
 Add `<Editor />` to any slide. Use `session` to identify it and `defaultFolder` to set the workspace.
 
 <div class="flex-1 mt-2 rounded-xl overflow-hidden border border-gray-200">
-  <Editor session="basic" />
+  <Editor session="basic" preload disableInitialFocus />
 </div>
 
 ---
@@ -58,7 +58,7 @@ Add `<Editor />` to any slide. Use `session` to identify it and `defaultFolder` 
 Use `persist` to keep the session alive when navigating away — state is preserved when you come back.
 
 <div class="flex-1 mt-2 rounded-xl overflow-hidden border border-gray-200">
-  <Editor session="persistent" persist />
+  <Editor session="persistent" persist preload disableInitialFocus />
 </div>
 
 ---
@@ -68,7 +68,7 @@ Use `persist` to keep the session alive when navigating away — state is preser
 Use `:zoom` to scale down VS Code for a better fit. Can also be set globally in the frontmatter with `livecode.zoom`.
 
 <div class="flex-1 mt-2 rounded-xl overflow-hidden border border-gray-200">
-  <Editor session="zoomed" :zoom="0.7" />
+  <Editor session="zoomed" :zoom="0.7" preload disableInitialFocus />
 </div>
 
 ---
@@ -78,7 +78,7 @@ Use `:zoom` to scale down VS Code for a better fit. Can also be set globally in 
 Use `colorScheme` to force a dark or light theme. Follows Slidev's `colorSchema` automatically if not set.
 
 <div class="flex-1 mt-2 rounded-xl overflow-hidden border border-gray-200">
-  <Editor session="dark-theme" colorScheme="dark" />
+  <Editor session="dark-theme" colorScheme="dark" preload disableInitialFocus />
 </div>
 
 ---
@@ -88,7 +88,7 @@ Use `colorScheme` to force a dark or light theme. Follows Slidev's `colorSchema`
 Use `fontSize`, `hideMinimap`, `hideActivityBar` and `hideStatusBar` to clean up the UI for a focused demo.
 
 <div class="flex-1 mt-2 rounded-xl overflow-hidden border border-gray-200">
-  <Editor session="presentation" :fontSize="18" hideMinimap hideActivityBar hideStatusBar />
+  <Editor session="presentation" :fontSize="18" hideMinimap hideActivityBar hideStatusBar preload disableInitialFocus />
 </div>
 
 ---
@@ -98,5 +98,5 @@ Use `fontSize`, `hideMinimap`, `hideActivityBar` and `hideStatusBar` to clean up
 Use `disableInitialFocus` to prevent VS Code from stealing keyboard focus on slide entry — arrow keys keep working.
 
 <div class="flex-1 mt-2 rounded-xl overflow-hidden border border-gray-200">
-  <Editor session="focus-guard" disableInitialFocus />
+  <Editor session="focus-guard" disableInitialFocus preload />
 </div>

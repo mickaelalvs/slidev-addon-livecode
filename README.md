@@ -82,6 +82,16 @@ Use `disableInitialFocus` to prevent VS Code from stealing keyboard focus when y
 
 Focus is held on the slide for 5 seconds after VS Code loads, then released normally. The user can interact with VS Code freely after that.
 
+## ⚡ Preload
+
+Use `preload` to warm up the VS Code session before the user reaches the slide. Slidev mounts adjacent slides in the background, so the session can start while the user is still on the previous slide:
+
+```md
+<Editor session="demo" preload />
+```
+
+Combine with `disableInitialFocus` for a seamless experience — the IDE is ready and keyboard navigation still works on slide entry.
+
 ## 🔒 Keep the session alive across navigation
 
 By default, navigating away from a slide stops the session. Use `persist` to keep it running:
@@ -124,6 +134,7 @@ Per-component props override these values.
 | `hideStatusBar`   | `boolean`           | `false` | Hide the VS Code status bar (bottom bar).                                       |
 | `height`          | `string`            | `100%`  | CSS height of the editor container.                                             |
 | `persist`         | `boolean`           | `false` | Keep the session alive when navigating away.                                    |
+| `preload`         | `boolean`           | `false` | Start the session while the slide is not yet active (requires Slidev preload).  |
 | `port`            | `number`            | auto    | Force a specific port for this session.                                         |
 | `startTimeout`    | `number`            | `30000` | Max startup time in ms before the session is marked as failed.                  |
 | `zoom`            | `number`            | `1`     | Scale factor for the VS Code UI (e.g. `0.8` for 80%).                          |
