@@ -39,7 +39,6 @@ addons:
 addons:
   - livecode
 ---
-
 # My slide
 
 <Editor session="demo" />
@@ -159,6 +158,7 @@ A demo deck lives in `showcase/`. Run it with:
 ```bash
 pnpm run dev
 ```
+
 ## 🧩 Slidev features
 
 `<Editor />` works alongside all [Slidev built-in features](https://sli.dev/features/), drag, resize, click animations, and more. Compose it freely with the rest of your slide content.
