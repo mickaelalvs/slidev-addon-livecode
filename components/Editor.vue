@@ -18,7 +18,6 @@ import type { EditorDeckConfig, EditorProps, SessionEntry } from '../types'
 
 const props = withDefaults(defineProps<EditorProps>(), {
   disableInitialFocus: false,
-  height: '100%',
   hideActivityBar: false,
   hideMinimap: false,
   hideStatusBar: false,
@@ -180,7 +179,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="container" class="slidev-editor" :style="{ height }" tabindex="-1">
+  <div ref="container" class="slidev-editor" tabindex="-1">
     <template v-if="!$slidev?.nav">
       <div class="slidev-editor-overlay">
         <div class="slidev-editor-overlay-title">IDE not available</div>

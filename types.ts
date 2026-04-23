@@ -5,7 +5,6 @@ export interface EditorProps {
   defaultFolder?: string
   disableInitialFocus?: boolean
   fontSize?: number
-  height?: string
   hideActivityBar?: boolean
   hideMinimap?: boolean
   hideStatusBar?: boolean

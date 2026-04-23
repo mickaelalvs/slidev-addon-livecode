@@ -84,6 +84,20 @@ livecode:
   zoom: 0.8
 ```
 
+## 🎨 Custom style
+
+The editor container is a plain `div` — pass any `class` or `style` to control its appearance:
+
+```vue
+<Editor session="demo" class="rounded-2xl border border-gray-200 shadow-xl" style="height: 480px" />
+```
+
+Works with Tailwind utilities too:
+
+```vue
+<Editor session="demo" class="h-[480px] w-full rounded-2xl border border-gray-200 shadow-lg" />
+```
+
 ## 🎯 Keyboard navigation guard
 
 Use `disableInitialFocus` to prevent VS Code from stealing keyboard focus when you navigate to a slide — arrow keys keep working for Slidev navigation:
@@ -144,7 +158,6 @@ Per-component props override these values.
 | `hideActivityBar`     | `boolean`           | `false`      | Hide the VS Code activity bar (left icon sidebar).                              |
 | `hideMinimap`         | `boolean`           | `false`      | Hide the editor minimap.                                                        |
 | `hideStatusBar`       | `boolean`           | `false`      | Hide the VS Code status bar (bottom bar).                                       |
-| `height`              | `string`            | `100%`       | CSS height of the editor container.                                             |
 | `persist`             | `boolean`           | `false`      | Keep the session alive when navigating away.                                    |
 | `preload`             | `boolean`           | `false`      | Start the session while the slide is not yet active (requires Slidev preload).  |
 | `port`                | `number`            | auto         | Force a specific port for this session.                                         |
