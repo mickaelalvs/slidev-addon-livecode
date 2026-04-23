@@ -9,6 +9,8 @@ Embed a live VS Code IDE in your [Slidev](https://sli.dev) presentations.
 
 Powered by [coderaft](https://github.com/pithings/coderaft), a zero-dependency redistribution of code-server that installs in under a second.
 
+<video src="https://github.com/user-attachments/assets/558460c2-3716-4ca9-9ecf-b9d4a04220c6" autoplay loop muted playsinline></video>
+
 ## 🎤 Why
 
 I often give live presentations where I need to show and modify code in real time. Switching between slides and a local IDE breaks the flow — alt-tabbing mid-talk is jarring for the audience and for me.
