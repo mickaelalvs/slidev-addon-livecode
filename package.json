@@ -32,6 +32,7 @@
     "vite.config.ts"
   ],
   "type": "module",
+  "types": "./types.ts",
   "exports": {
     "./composables/*": "./composables/*",
     "./types": "./types.ts"
