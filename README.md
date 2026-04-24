@@ -65,9 +65,13 @@ Both absolute and relative paths are supported. Relative paths are resolved from
 Force VS Code to use a specific color theme:
 
 ```js
-<Editor session="demo" colorScheme="dark" />
 <Editor session="demo" colorScheme="light" />
 ```
+```js
+<Editor session="demo" colorScheme="dark" />
+```
+
+<img width="2668" height="1544" alt="A VS Code editor with the dark color theme applied inside a Slidev slide" src="https://github.com/user-attachments/assets/339048e5-a277-4df6-b64a-9af0bd661b44" />
 
 If omitted, the color scheme automatically follows your Slidev presentation's `colorSchema` setting.
 
@@ -85,6 +89,24 @@ Can also be set globally for all editors in the frontmatter:
 livecode:
   zoom: 0.8
 ```
+
+<img width="2668" height="1548" alt="A VS Code editor scaled to 80% inside a Slidev slide" src="https://github.com/user-attachments/assets/b8ebc2aa-d654-4c0d-8f66-d340a82a531d" />
+
+## 🔬 Presentation mode
+
+Clean up the VS Code UI for a focused demo — hide distractions and increase the font size for large rooms:
+
+```js
+<Editor
+  session="demo"
+  :fontSize="18"
+  hideMinimap
+  hideActivityBar
+  hideStatusBar
+/>
+```
+
+<img width="2668" height="1544" alt="A VS Code editor with the activity bar, minimap and status bar hidden" src="https://github.com/user-attachments/assets/c5908413-4e32-4435-a5d8-21a43b40b2d3" />
 
 ## 🎨 Custom style
 
@@ -129,6 +151,8 @@ By default, navigating away from a slide stops the session. Use `persist` to kee
 ```
 
 The session survives slide changes and resumes instantly when you come back.
+
+<img width="1832" height="1080" alt="Two Slidev slides showing the same VS Code session with state preserved after navigation" src="https://github.com/user-attachments/assets/4b69fe91-e479-4d0a-9fcb-99688cb0bf6f" />
 
 ## ⚙️ Deck-level config
 
