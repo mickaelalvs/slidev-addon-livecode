@@ -46,7 +46,7 @@ addons:
 <Editor session="demo" />
 ```
 
-That's it. When you navigate to the slide, a VS Code instance starts automatically and loads inside the slide.
+That's it. When you navigate to the slide, a VS Code instance starts automatically and loads inside the slide. Each session starts with workspace trust disabled and git repository detection turned off so no setup popups.
 
 ## 📂 Open a specific workspace
 

@@ -17,7 +17,7 @@ type SessionEntry = {
   close: () => Promise<void>
   port: number
   url: string
-  userDataDir?: string
+  userDataDir: string
 }
 
 type SendEvent = (session: string, url: string, state: 'running' | 'error', error?: string) => void
@@ -55,19 +55,19 @@ export class SessionManager {
       const absoluteFolder = defaultFolder ? resolve(root, defaultFolder) : root
       const resolvedFolder = existsSync(absoluteFolder) ? absoluteFolder : root
 
-      const settings: Record<string, unknown> = {}
+      const settings: Record<string, unknown> = {
+        'git.openRepositoryInParentFolders': 'never',
+        'security.workspace.trust.enabled': false,
+      }
       if (colorScheme) settings['workbench.colorTheme'] = COLOR_THEMES[colorScheme]
       if (fontSize) settings['editor.fontSize'] = fontSize
       if (hideMinimap) settings['editor.minimap.enabled'] = false
       if (hideActivityBar) settings['workbench.activityBar.location'] = 'hidden'
       if (hideStatusBar) settings['workbench.statusBar.visible'] = false
 
-      let userDataDir: string | undefined
-      if (Object.keys(settings).length > 0) {
-        userDataDir = mkdtempSync(join(tmpdir(), 'livecode-'))
-        mkdirSync(join(userDataDir, 'User'), { recursive: true })
-        writeFileSync(join(userDataDir, 'User', 'settings.json'), JSON.stringify(settings))
-      }
+      const userDataDir = mkdtempSync(join(tmpdir(), 'livecode-'))
+      mkdirSync(join(userDataDir, 'User'), { recursive: true })
+      writeFileSync(join(userDataDir, 'User', 'settings.json'), JSON.stringify(settings))
 
       const handle = await Promise.race([
         startCodeServer({
@@ -101,7 +101,7 @@ export class SessionManager {
     const entry = this.sessions.get(session)
     if (!entry) return
     entry.close().catch(() => {})
-    if (entry.userDataDir) rmSync(entry.userDataDir, { recursive: true, force: true })
+    rmSync(entry.userDataDir, { recursive: true, force: true })
     this.sessions.delete(session)
     this.usedPorts.delete(entry.port)
     console.log(`[livecode] Session "${session}" stopped`)
@@ -110,7 +110,7 @@ export class SessionManager {
   cleanup(): void {
     for (const [, entry] of this.sessions) {
       entry.close().catch(() => {})
-      if (entry.userDataDir) rmSync(entry.userDataDir, { recursive: true, force: true })
+      rmSync(entry.userDataDir, { recursive: true, force: true })
     }
     this.sessions.clear()
     this.usedPorts.clear()
