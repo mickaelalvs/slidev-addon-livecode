@@ -1,6 +1,6 @@
 {
   "name": "slidev-addon-livecode",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Live VS Code IDE sessions in your Slidev presentations, powered by coderaft",
   "keywords": [
     "code-server",
