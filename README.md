@@ -9,7 +9,7 @@ Embed a live VS Code IDE in your [Slidev](https://sli.dev) presentations.
 
 Powered by [coderaft](https://github.com/pithings/coderaft), a zero-dependency redistribution of code-server that installs in under a second.
 
-![demo](https://github.com/user-attachments/assets/221dedbd-b44a-40fc-a517-0568d0037eb3)
+![demo](https://raw.githubusercontent.com/mickaelalvs/slidev-addon-livecode/main/.github/assets/demo.gif)
 
 ## 🎤 Why
 
@@ -72,7 +72,7 @@ Force VS Code to use a specific color theme:
 <Editor session="demo" colorScheme="dark" />
 ```
 
-<img width="2668" height="1544" alt="A VS Code editor with the dark color theme applied inside a Slidev slide" src="https://github.com/user-attachments/assets/339048e5-a277-4df6-b64a-9af0bd661b44" />
+<img width="2668" height="1544" alt="A VS Code editor with the dark color theme applied inside a Slidev slide" src="https://raw.githubusercontent.com/mickaelalvs/slidev-addon-livecode/main/.github/assets/dark-theme.png" />
 
 If omitted, the color scheme automatically follows your Slidev presentation's `colorSchema` setting.
 
@@ -91,7 +91,7 @@ livecode:
   zoom: 0.8
 ```
 
-<img width="2668" height="1548" alt="A VS Code editor scaled to 80% inside a Slidev slide" src="https://github.com/user-attachments/assets/b8ebc2aa-d654-4c0d-8f66-d340a82a531d" />
+<img width="2668" height="1548" alt="A VS Code editor scaled to 80% inside a Slidev slide" src="https://raw.githubusercontent.com/mickaelalvs/slidev-addon-livecode/main/.github/assets/zoom.png" />
 
 ## 🔬 Presentation mode
 
@@ -107,7 +107,7 @@ Clean up the VS Code UI for a focused demo — hide distractions and increase th
 />
 ```
 
-<img width="2668" height="1544" alt="A VS Code editor with the activity bar, minimap and status bar hidden" src="https://github.com/user-attachments/assets/c5908413-4e32-4435-a5d8-21a43b40b2d3" />
+<img width="2668" height="1544" alt="A VS Code editor with the activity bar, minimap and status bar hidden" src="https://raw.githubusercontent.com/mickaelalvs/slidev-addon-livecode/main/.github/assets/presentation.png" />
 
 ## 🎨 Custom style
 
@@ -153,7 +153,7 @@ By default, navigating away from a slide stops the session. Use `persist` to kee
 
 The session survives slide changes and resumes instantly when you come back.
 
-<img width="1832" height="1080" alt="Two Slidev slides showing the same VS Code session with state preserved after navigation" src="https://github.com/user-attachments/assets/4b69fe91-e479-4d0a-9fcb-99688cb0bf6f" />
+<img width="1832" height="1080" alt="Two Slidev slides showing the same VS Code session with state preserved after navigation" src="https://raw.githubusercontent.com/mickaelalvs/slidev-addon-livecode/main/.github/assets/persist.gif" />
 
 ## ⚙️ Deck-level config
 
