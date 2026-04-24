@@ -26,6 +26,7 @@
     "components",
     "composables",
     "!composables/__tests__",
+    "plugin",
     "setup",
     "styles",
     "types.ts",

@@ -1,16 +1,10 @@
-import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
-import { tmpdir } from 'node:os'
-import { join, resolve } from 'node:path'
-
 import { defineConfig } from 'vite'
 
 import { resolvePort } from './composables/resolvePort'
+import { SessionManager } from './plugin/sessionManager'
 import type { StartedEvent, StartRequest } from './types'
 
 export { resolvePort }
-
-const DEFAULT_PORT = 9000
-const DEFAULT_START_TIMEOUT_MS = 30_000
 
 let previousSigintHandler: (() => void) | null = null
 let previousSigtermHandler: (() => void) | null = null
@@ -22,19 +16,9 @@ export default defineConfig({
       name: 'slidev-addon-livecode',
 
       configureServer(server) {
-        const root = server.config.root
-        const COLOR_THEMES = {
-          dark: 'Default Dark Modern',
-          light: 'Default Light Modern',
-        } as const
+        const manager = new SessionManager()
 
-        const sessions = new Map<
-          string,
-          { close: () => Promise<void>; port: number; url: string; userDataDir?: string }
-        >()
-        const usedPorts = new Set<number>()
-
-        const sendStartedEvent = (
+        const send = (
           session: string,
           url: string,
           state: 'running' | 'error',
@@ -43,98 +27,15 @@ export default defineConfig({
           server.ws.send('livecode:started', { error, session, state, url } satisfies StartedEvent)
         }
 
-        server.ws.on('livecode:start', async (request: StartRequest) => {
-          const {
-            colorScheme,
-            defaultFolder,
-            defaultPort = DEFAULT_PORT,
-            fontSize,
-            hideActivityBar,
-            hideMinimap,
-            hideStatusBar,
-            port: requestedPort,
-            session,
-            startTimeout = DEFAULT_START_TIMEOUT_MS,
-          } = request
-
-          const existing = sessions.get(session)
-          if (existing) {
-            sendStartedEvent(session, existing.url, 'running')
-            return
-          }
-
-          const port = resolvePort(usedPorts, requestedPort, defaultPort)
-          usedPorts.add(port)
-
-          try {
-            const { startCodeServer } = await import('coderaft')
-
-            const absoluteFolder = defaultFolder ? resolve(root, defaultFolder) : root
-            const resolvedFolder = existsSync(absoluteFolder) ? absoluteFolder : root
-
-            const settings: Record<string, unknown> = {}
-            if (colorScheme) settings['workbench.colorTheme'] = COLOR_THEMES[colorScheme]
-            if (fontSize) settings['editor.fontSize'] = fontSize
-            if (hideMinimap) settings['editor.minimap.enabled'] = false
-            if (hideActivityBar) settings['workbench.activityBar.location'] = 'hidden'
-            if (hideStatusBar) settings['workbench.statusBar.visible'] = false
-
-            let userDataDir: string | undefined
-            if (Object.keys(settings).length > 0) {
-              userDataDir = mkdtempSync(join(tmpdir(), 'livecode-'))
-              mkdirSync(join(userDataDir, 'User'), { recursive: true })
-              writeFileSync(join(userDataDir, 'User', 'settings.json'), JSON.stringify(settings))
-            }
-
-            const handle = await Promise.race([
-              startCodeServer({
-                defaultFolder: resolvedFolder,
-                host: '127.0.0.1',
-                port,
-                ...(userDataDir ? { vscode: { 'user-data-dir': userDataDir } } : {}),
-              }),
-              new Promise<never>((_, reject) =>
-                setTimeout(
-                  () => reject(new Error(`timeout after ${startTimeout}ms`)),
-                  startTimeout,
-                ),
-              ),
-            ])
-
-            sessions.set(session, {
-              close: () => handle.close(),
-              port,
-              url: handle.url,
-              userDataDir,
-            })
-            console.log(`[livecode] Session "${session}" running at ${handle.url}`)
-            sendStartedEvent(session, handle.url, 'running')
-          } catch (err) {
-            usedPorts.delete(port)
-            const message = err instanceof Error ? err.message : String(err)
-            console.error(`[livecode] Failed to start session "${session}": ${message}`)
-            sendStartedEvent(session, '', 'error', message)
-          }
+        server.ws.on('livecode:start', (request: StartRequest) => {
+          manager.start(request, server.config.root, send)
         })
 
         server.ws.on('livecode:stop', ({ session }: { session: string }) => {
-          const entry = sessions.get(session)
-          if (!entry) return
-          entry.close().catch(() => {})
-          if (entry.userDataDir) rmSync(entry.userDataDir, { recursive: true, force: true })
-          sessions.delete(session)
-          usedPorts.delete(entry.port)
-          console.log(`[livecode] Session "${session}" stopped`)
+          manager.stop(session)
         })
 
-        const cleanup = () => {
-          for (const [, entry] of sessions) {
-            entry.close().catch(() => {})
-            if (entry.userDataDir) rmSync(entry.userDataDir, { recursive: true, force: true })
-          }
-          sessions.clear()
-          usedPorts.clear()
-        }
+        const cleanup = () => manager.cleanup()
 
         const sigintHandler = () => {
           cleanup()
