@@ -72,7 +72,7 @@ Force VS Code to use a specific color theme:
 <Editor session="demo" colorScheme="dark" />
 ```
 
-<img width="2668" height="1544" alt="A VS Code editor with the dark color theme applied inside a Slidev slide" src="https://raw.githubusercontent.com/mickaelalvs/slidev-addon-livecode/main/.github/assets/dark-theme.png" />
+![A VS Code editor with the dark color theme applied inside a Slidev slide](https://raw.githubusercontent.com/mickaelalvs/slidev-addon-livecode/main/.github/assets/dark-theme.png)
 
 If omitted, the color scheme automatically follows your Slidev presentation's `colorSchema` setting.
 
@@ -91,7 +91,7 @@ livecode:
   zoom: 0.8
 ```
 
-<img width="2668" height="1548" alt="A VS Code editor scaled to 80% inside a Slidev slide" src="https://raw.githubusercontent.com/mickaelalvs/slidev-addon-livecode/main/.github/assets/zoom.png" />
+![A VS Code editor scaled to 80% inside a Slidev slide](https://raw.githubusercontent.com/mickaelalvs/slidev-addon-livecode/main/.github/assets/zoom.png)
 
 ## 🔬 Presentation mode
 
@@ -107,7 +107,7 @@ Clean up the VS Code UI for a focused demo — hide distractions and increase th
 />
 ```
 
-<img width="2668" height="1544" alt="A VS Code editor with the activity bar, minimap and status bar hidden" src="https://raw.githubusercontent.com/mickaelalvs/slidev-addon-livecode/main/.github/assets/presentation.png" />
+![A VS Code editor with the activity bar, minimap and status bar hidden](https://raw.githubusercontent.com/mickaelalvs/slidev-addon-livecode/main/.github/assets/presentation.png)
 
 ## 🎨 Custom style
 
@@ -153,7 +153,7 @@ By default, navigating away from a slide stops the session. Use `persist` to kee
 
 The session survives slide changes and resumes instantly when you come back.
 
-<img width="1832" height="1080" alt="Two Slidev slides showing the same VS Code session with state preserved after navigation" src="https://raw.githubusercontent.com/mickaelalvs/slidev-addon-livecode/main/.github/assets/persist.gif" />
+![Two Slidev slides showing the same VS Code session with state preserved after navigation](https://raw.githubusercontent.com/mickaelalvs/slidev-addon-livecode/main/.github/assets/persist.gif)
 
 ## ⚙️ Deck-level config
 
