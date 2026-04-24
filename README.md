@@ -67,6 +67,7 @@ Force VS Code to use a specific color theme:
 ```js
 <Editor session="demo" colorScheme="light" />
 ```
+
 ```js
 <Editor session="demo" colorScheme="dark" />
 ```
