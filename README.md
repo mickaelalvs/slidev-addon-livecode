@@ -50,13 +50,13 @@ That's it. When you navigate to the slide, a VS Code instance starts automatical
 
 ## 📂 Open a specific workspace
 
-```vue
+```js
 <Editor session="demo" defaultFolder="/path/to/your/project" />
 ```
 
 Both absolute and relative paths are supported. Relative paths are resolved from the Slidev project root:
 
-```vue
+```jsx
 <Editor session="demo" defaultFolder=".." />
 ```
 
@@ -64,7 +64,7 @@ Both absolute and relative paths are supported. Relative paths are resolved from
 
 Force VS Code to use a specific color theme:
 
-```vue
+```js
 <Editor session="demo" colorScheme="dark" />
 <Editor session="demo" colorScheme="light" />
 ```
@@ -75,7 +75,7 @@ If omitted, the color scheme automatically follows your Slidev presentation's `c
 
 VS Code can appear too large inside a slide. Use the `zoom` prop to scale it down:
 
-```vue
+```js
 <Editor session="demo" :zoom="0.8" />
 ```
 
@@ -90,13 +90,13 @@ livecode:
 
 The editor container is a plain `div` — pass any `class` or `style` to control its appearance:
 
-```vue
+```js
 <Editor session="demo" class="rounded-2xl border border-gray-200 shadow-xl" style="height: 480px" />
 ```
 
 Works with Tailwind utilities too:
 
-```vue
+```js
 <Editor session="demo" class="h-[480px] w-full rounded-2xl border border-gray-200 shadow-lg" />
 ```
 
@@ -104,7 +104,7 @@ Works with Tailwind utilities too:
 
 Use `disableInitialFocus` to prevent VS Code from stealing keyboard focus when you navigate to a slide — arrow keys keep working for Slidev navigation:
 
-```vue
+```js
 <Editor session="demo" disableInitialFocus />
 ```
 
@@ -114,7 +114,7 @@ Focus is held on the slide, after an interaction, the user can interact with VS 
 
 Use `preload` to warm up the VS Code session before the user reaches the slide. Slidev mounts adjacent slides in the background, so the session can start while the user is still on the previous slide:
 
-```vue
+```js
 <Editor session="demo" preload />
 ```
 
@@ -124,7 +124,7 @@ Combine with `disableInitialFocus` for a seamless experience — the IDE is read
 
 By default, navigating away from a slide stops the session. Use `persist` to keep it running:
 
-```vue
+```js
 <Editor session="demo" persist />
 ```
 
@@ -189,7 +189,7 @@ Pair `<Editor />` with other addons for a fully self-contained demo environment 
 - **[slidev-addon-liveshell](https://npmx.dev/package/slidev-addon-liveshell)** — embed a live terminal directly in your slide alongside the editor.
 - **An `<iframe>` pointing to your dev server** — embed your running app next to the editor. Edit code in VS Code, and the hot reload updates the iframe in real time, all without leaving the presentation.
 
-```vue
+```js
 <div class="flex gap-2 flex-1">
   <Editor session="demo" class="w-1/2" />
   <iframe src="http://localhost:5173" class="w-1/2" />
