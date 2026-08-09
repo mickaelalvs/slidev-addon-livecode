@@ -60,6 +60,16 @@ Both absolute and relative paths are supported. Relative paths are resolved from
 <Editor session="demo" defaultFolder=".." />
 ```
 
+## 📄 Open a specific file
+
+Open a file directly instead of landing on the workspace's file explorer:
+
+```js
+<Editor session="demo" defaultFolder=".." openFile="../vite.config.ts" />
+```
+
+Both absolute and relative paths are supported, same as `defaultFolder`.
+
 ## 🌗 Color scheme
 
 Force VS Code to use a specific color theme:
@@ -179,6 +189,7 @@ Per-component props override these values.
 | --------------------- | ------------------- | ------------ | ------------------------------------------------------------------------------- |
 | `session`             | `string`            | auto         | Unique session identifier. Auto-generated from slide number if omitted.         |
 | `defaultFolder`       | `string`            | project root | Workspace folder to open. Absolute or relative to the Slidev root.              |
+| `openFile`            | `string`            | —            | File to open on load. Absolute or relative to the Slidev root.                  |
 | `colorScheme`         | `'dark' \| 'light'` | auto         | VS Code color theme. Defaults to Slidev's `colorSchema` if set, otherwise none. |
 | `fontSize`            | `number`            | —            | Editor font size. Useful for visibility in large rooms.                         |
 | `disableInitialFocus` | `boolean`           | `false`      | Prevent VS Code from stealing keyboard focus on slide entry.                    |
@@ -224,14 +235,13 @@ Pair `<Editor />` with other addons for a fully self-contained demo environment 
 ## 🏷️ Requirements
 
 - `@slidev/client >= 52`
-- `coderaft >= 0.0.25`
+- `coderaft >= 0.0.26`
 - `vue >= 3.4`
 
 ## 💡 Ideas
 
 Features that may land in a future release:
 
-- **Open a specific file on load** — open a file directly from `<Editor />` props, pending [coderaft#4](https://github.com/pithings/coderaft/pull/4)
 - **Pre-installed extensions** — declare VS Code extensions to install automatically when the session starts.
 - **Keyboard shortcuts** — configure custom keybindings per session via props.
 
