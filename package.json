@@ -51,7 +51,7 @@
     "@slidev/client": "52.14.2",
     "@slidev/types": "52.14.2",
     "bumpp": "9.11.1",
-    "coderaft": "^0.0.25",
+    "coderaft": "^0.0.41",
     "oxfmt": "latest",
     "oxlint": "latest",
     "typescript": "5.7.3",
@@ -62,7 +62,7 @@
   "peerDependencies": {
     "@slidev/client": ">=52.0.0",
     "@slidev/types": ">=52.0.0",
-    "coderaft": ">=0.0.25",
+    "coderaft": ">=0.0.26",
     "vue": ">=3.4.0"
   },
   "engines": {

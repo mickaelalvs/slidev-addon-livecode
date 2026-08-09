@@ -18,8 +18,8 @@ importers:
         specifier: 9.11.1
         version: 9.11.1
       coderaft:
-        specifier: ^0.0.25
-        version: 0.0.25
+        specifier: ^0.0.41
+        version: 0.0.41
       oxfmt:
         specifier: latest
         version: 0.46.0
@@ -48,8 +48,8 @@ importers:
         specifier: latest
         version: 0.25.0
       coderaft:
-        specifier: ^0.0.25
-        version: 0.0.25
+        specifier: ^0.0.41
+        version: 0.0.41
       slidev-addon-livecode:
         specifier: workspace:*
         version: link:..
@@ -1876,8 +1876,8 @@ packages:
   codemirror-theme-vars@0.1.2:
     resolution: {integrity: sha512-WTau8X2q58b0SOAY9DO+iQVw8JKVEgyQIqArp2D732tcc+pobbMta3bnVMdQdmgwuvNrOFFr6HoxPRoQOgooFA==}
 
-  coderaft@0.0.25:
-    resolution: {integrity: sha512-ZCBue8YJ6p5f6P3iCpjjE7SIIWE4il34AJos8lHhxceu+WhW28ySY/xHloGyTXjXrcJkyoHmQKseVXfjMDmamA==}
+  coderaft@0.0.41:
+    resolution: {integrity: sha512-37VDl/EG34Jb4+adO8CX61vro+TxvCBHFrFwbhYjHMbf2Muw5Gou8+CMNiJUKgIqXsr0UNtJ8Azt0XnhhlwoVw==}
     hasBin: true
 
   colorette@2.0.20:
@@ -5951,7 +5951,7 @@ snapshots:
 
   codemirror-theme-vars@0.1.2: {}
 
-  coderaft@0.0.25: {}
+  coderaft@0.0.41: {}
 
   colorette@2.0.20: {}
 
