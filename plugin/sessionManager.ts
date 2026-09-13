@@ -3,6 +3,7 @@ import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 
 import { resolvePort } from '../composables/resolvePort'
+import { withOpenFile } from './openFileURL'
 import type { StartRequest } from '../types'
 
 const COLOR_THEMES = {
@@ -83,13 +84,7 @@ export class SessionManager {
           },
           ...(resolvedOpenFile
             ? {
-                formatURL: (url: URL) => {
-                  url.searchParams.set(
-                    'payload',
-                    JSON.stringify([['openFile', `vscode-remote://remote${resolvedOpenFile}`]]),
-                  )
-                  return url
-                },
+                formatURL: (url: URL) => withOpenFile(url, resolvedOpenFile),
               }
             : {}),
         }),
